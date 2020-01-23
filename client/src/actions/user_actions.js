@@ -9,7 +9,8 @@ import {
     AUTH_USER,
     LOGOUT_USER,
     ADD_TO_CART_USER,
-    GET_CART_ITEMS_USER
+    GET_CART_ITEMS_USER,
+    REMOVE_FROM_CART_USER
 } from './types'
 
 
@@ -19,6 +20,23 @@ export const addToCart = (_id) => {
     )
     return {
         type: ADD_TO_CART_USER,
+        payload: request
+    }
+}
+export const removeFromCart = (_id) => {
+    const request = axios.get(`${USER_SERVER}/removeFromCart?_id=${_id}`).then(res => {
+        res.data.cart.forEach(item => {
+            res.data.cartDetail.forEach((elem, i) => {
+                if (item.id === elem._id) {
+                    res.data.cartDetail[i].quantity = item.quantity
+                }
+            })
+        })
+
+        return res.data
+    })
+    return {
+        type: REMOVE_FROM_CART_USER,
         payload: request
     }
 }
