@@ -10,7 +10,8 @@ import {
     LOGOUT_USER,
     ADD_TO_CART_USER,
     GET_CART_ITEMS_USER,
-    REMOVE_FROM_CART_USER
+    REMOVE_FROM_CART_USER,
+    UPDATE_PROFILE_USER
 } from './types'
 
 
@@ -97,5 +98,9 @@ export const getCartItems = (cartItems, userCart) => {
         type: GET_CART_ITEMS_USER,
         payload: request
     }
+
+}
+
+export const updateProfile = () => {
 
 }
