@@ -415,6 +415,28 @@ app.get('/api/users/removeFromCart', auth, (req, res) => {
   )
 })
 
+app.post('/api/users/update_profile', auth, (req, res) => {
+  User.findOneAndUpdate({
+      _id: req.user._id
+    }, {
+      $set: req.body
+    }, {
+      new: true
+    },
+    (err, doc) => {
+      if (err) return res.json({
+        success: false,
+        err
+      })
+      return res.status(200).send({
+        success: true,
+      })
+    }
+
+
+  )
+})
+
 const port = process.env.PORT || 3002;
 app.listen(port, () => {
   console.log(`The server in running at ${port} `);

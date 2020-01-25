@@ -7,7 +7,7 @@ import {
   isFormValid,
   populateFields
 } from '../utils/form/formActions';
-import { updateProfile } from '../../actions/user_actions';
+import { updateProfile, clearUpdateProfile } from '../../actions/user_actions';
 import { connect } from 'react-redux';
 class Info extends Component {
   state = {
@@ -88,30 +88,25 @@ class Info extends Component {
     let dataToSubmit = generateData(this.state.formdata, 'updateInfo');
     let formIsValid = isFormValid(this.state.formdata, 'updateInfo');
     if (formIsValid) {
-      //   console.log(dataToSubmit);
-      //   this.props
-      //     .dispatch(updateProfile(dataToSubmit))
-      //     .then(res => {
-      //       if (res.payload.success) {
-      //         this.setState({
-      //           formError: false,
-      //           formSuccess: true
-      //         });
-      //         setTimeout(() => {
-      //           this.props.history.push('/');
-      //         }, 3000);
-      //       } else {
-      //         this.setState({
-      //           formError: true
-      //         });
-      //       }
-      //     })
-      //     .catch(e => {
-      //       console.log(e);
-      //       this.setState({
-      //         formError: true
-      //       });
-      //     });
+      console.log(dataToSubmit);
+      this.props.dispatch(updateProfile(dataToSubmit)).then(res => {
+        console.log(res);
+        if (this.props.user.updateProfile.success) {
+          this.setState(
+            {
+              formSuccess: true
+            },
+            () => {
+              setTimeout(() => {
+                this.props.dispatch(clearUpdateProfile());
+                this.setState({
+                  formSuccess: false
+                });
+              }, 2000);
+            }
+          );
+        }
+      });
     } else {
       this.setState({
         formError: true

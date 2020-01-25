@@ -11,7 +11,8 @@ import {
     ADD_TO_CART_USER,
     GET_CART_ITEMS_USER,
     REMOVE_FROM_CART_USER,
-    UPDATE_PROFILE_USER
+    UPDATE_PROFILE_USER,
+    CLEAR_UPDATE_PROFILE_USER
 } from './types'
 
 
@@ -101,6 +102,20 @@ export const getCartItems = (cartItems, userCart) => {
 
 }
 
-export const updateProfile = () => {
+export const updateProfile = (dataToSubmit) => {
+    const request = axios.post(`${USER_SERVER}/update_profile`, dataToSubmit).then(res =>
+        res.data
+    )
 
+    return {
+        type: UPDATE_PROFILE_USER,
+        payload: request
+    }
+}
+
+export const clearUpdateProfile = () => {
+    return {
+        type: CLEAR_UPDATE_PROFILE_USER,
+        payload: ''
+    }
 }

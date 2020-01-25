@@ -5,7 +5,9 @@ import {
     LOGOUT_USER,
     ADD_TO_CART_USER,
     GET_CART_ITEMS_USER,
-    REMOVE_FROM_CART_USER
+    REMOVE_FROM_CART_USER,
+    UPDATE_PROFILE_USER,
+    CLEAR_UPDATE_PROFILE_USER
 } from '../actions/types'
 
 
@@ -56,7 +58,17 @@ export default function (state = {}, action) {
                 ...state,
                 cartDetail: action.payload
             };
-        default:
-            return state;
+        case UPDATE_PROFILE_USER:
+            return {
+                ...state,
+                updateProfile: action.payload
+            };
+        case CLEAR_UPDATE_PROFILE_USER:
+            return {
+                ...state,
+                updateProfile: action.payload
+            }
+            default:
+                return state;
     }
 }
