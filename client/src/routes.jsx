@@ -14,6 +14,7 @@ import Auth from './hoc/auth';
 import AddProduct from './components/User/Admin/add_product';
 import ManageCategories from './components/User/Admin/manage_categories';
 import UserInfo from './components/User/info';
+import ManageSiteInfo from './components/User/Admin/manage_site_info';
 
 import Product from './components/product';
 const Routes = () => {
@@ -26,6 +27,11 @@ const Routes = () => {
           component={Auth(Product, null)}
         />
         <Route path='/user/cart' exact component={Auth(UserCart, true)} />
+        <Route
+          path='/admin/site_info'
+          exact
+          component={Auth(ManageSiteInfo, true)}
+        />
         <Route path='/user/dashboard' exact component={Auth(Dashboard, true)} />
         <Route
           path='/user/user_profile'

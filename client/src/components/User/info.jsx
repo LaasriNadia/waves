@@ -88,9 +88,7 @@ class Info extends Component {
     let dataToSubmit = generateData(this.state.formdata, 'updateInfo');
     let formIsValid = isFormValid(this.state.formdata, 'updateInfo');
     if (formIsValid) {
-      console.log(dataToSubmit);
       this.props.dispatch(updateProfile(dataToSubmit)).then(res => {
-        console.log(res);
         if (this.props.user.updateProfile.success) {
           this.setState(
             {

@@ -41,6 +41,9 @@ const {
 const {
   Product
 } = require('./models/product');
+const {
+  Site
+} = require('./models/site');
 
 // Middlewares
 const {
@@ -436,6 +439,18 @@ app.post('/api/users/update_profile', auth, (req, res) => {
 
   )
 })
+
+
+//              SITE
+//=================================
+app.get('/api/site/getSiteData', (req, res) => {
+  Site.find({}, (err, site) => {
+    if (err) return res.status(400).send(err)
+    res.status(200).send(site[0].siteInfo)
+  })
+})
+
+
 
 const port = process.env.PORT || 3002;
 app.listen(port, () => {
