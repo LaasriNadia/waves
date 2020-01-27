@@ -443,11 +443,36 @@ app.post('/api/users/update_profile', auth, (req, res) => {
 
 //              SITE
 //=================================
-app.get('/api/site/getSiteData', (req, res) => {
+app.get('/api/site/site_data', (req, res) => {
   Site.find({}, (err, site) => {
     if (err) return res.status(400).send(err)
     res.status(200).send(site[0].siteInfo)
   })
+})
+
+app.post('/api/site/site_data', auth, admin, (req, res) => {
+  Site.findOneAndUpdate({
+      name: "Site"
+    }, {
+      $set: {
+        siteInfo: req.body
+      }
+    }, {
+      new: true
+    },
+    (err, doc) => {
+      if (err) return res.json({
+        success: false,
+        err
+      })
+      return res.status(200).send({
+        success: true,
+        siteInfo: doc.siteInfo
+      })
+    }
+
+
+  )
 })
 
 

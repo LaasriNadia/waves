@@ -21,4 +21,5 @@ export const ADD_WOOD = 'add_wood';
 export const CLEAR_PRODUCT_DETAIL = 'clear_product_detail';
 
 
+export const GET_SITE_INFO = 'get_site_info';
 export const UPDATE_SITE_INFO = 'update_site_info';

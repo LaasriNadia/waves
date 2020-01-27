@@ -9,7 +9,7 @@ import {
   populateFields
 } from '../../utils/form/formActions';
 
-import { updateSiteInfo } from '../../../actions/site_actions';
+import { getSiteInfo, updateSiteInfo } from '../../../actions/site_actions';
 
 class ManageSiteInfo extends Component {
   state = {
@@ -90,11 +90,12 @@ class ManageSiteInfo extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(updateSiteInfo()).then(() => {
+    this.props.dispatch(getSiteInfo()).then(() => {
       const newFormData = populateFields(
         this.state.formdata,
         this.props.site.siteInfo[0]
       );
+      console.log(newFormData);
       this.setState({
         formdata: newFormData
       });
@@ -114,7 +115,20 @@ class ManageSiteInfo extends Component {
     let dataToSubmit = generateData(this.state.formdata, 'site_info');
     let formIsValid = isFormValid(this.state.formdata, 'site_info');
     if (formIsValid) {
-      console.log(dataToSubmit);
+      this.props.dispatch(updateSiteInfo(dataToSubmit)).then(res => {
+        this.setState(
+          {
+            formSuccess: true
+          },
+          () => {
+            setTimeout(() => {
+              this.setState({
+                formSuccess: false
+              });
+            }, 2000);
+          }
+        );
+      });
     } else {
       this.setState({
         formError: true
