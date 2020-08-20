@@ -19,7 +19,7 @@
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.55",
     "@material-ui/core": "^4.6.0",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.11.0",
     "concurrently": "^3.6.0",
